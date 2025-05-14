@@ -68,3 +68,4 @@ dist-ssr
 *.sln
 *.sw?
 HypeTrade307/src/pages/LoginForm.css
+.vercel

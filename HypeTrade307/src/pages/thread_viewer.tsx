@@ -16,7 +16,6 @@ import {
 import FlagButton from "./FlagButton";
 import "./Thread.css";
 import { API_BASE_URL } from '../config';
-
 // Define interfaces
 interface Post {
     post_id: number;

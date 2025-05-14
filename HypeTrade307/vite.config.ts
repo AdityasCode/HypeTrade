@@ -10,10 +10,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'https://<your-cloud-run-url>.a.run.app',
         changeOrigin: true,
-        // Remove the rewrite - this is causing issues with your API paths
-        // rewrite: (path) => path.replace(/^\/api/, '')
+        rewrite: path => path.replace(/^\/api/, '/api'),
       }
     }
   },
