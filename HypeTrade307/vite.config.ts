@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://<your-cloud-run-url>.a.run.app',
+        target: 'https://hypet-145797464141.us-central1.run.app',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '/api'),
       }
