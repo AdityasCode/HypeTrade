@@ -1,5 +1,4 @@
 // pages/AdminPanel.tsx
-//@ts-nocheck
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -36,6 +35,7 @@ export default function AdminPanel() {
   const [flags, setFlags] = useState<Flag[]>([]);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [selectedContent, setSelectedContent] = useState<FlaggedContent | null>(null);
+  //@ts-ignore
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -137,8 +137,6 @@ export default function AdminPanel() {
         case "message": {
           try {
             flaggedContent = {
-              content: flag.content || "No content",
-              author: flag.sender_username || "Unknown sender",
               created_at: flag.created_at,
             };
           } catch {

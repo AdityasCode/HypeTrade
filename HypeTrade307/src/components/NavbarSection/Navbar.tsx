@@ -1,4 +1,3 @@
-//@ts-nocheck
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -13,7 +12,6 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ColorModeIconDropdown from '../shared-theme/ColorModeIconDropdown.tsx';
-import Sitemark from '../SitemarkIcon';
 import UserSearchBar from './UserSearchBar';
 import type {} from '@mui/material/themeCssVarsAugmentation';
 import { useEffect, useState } from 'react';
