@@ -2,19 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import "./index.css"
 import App from './App.tsx'
-import { MyAppErrorBoundary } from 'src/components/MyAppErrorBoundary.tsx'
-
-import { MyAppErrorBoundary } from './components/MyAppErrorBoundary';
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <MyAppErrorBoundary>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </MyAppErrorBoundary>
-    </React.StrictMode>
-);
+import { MyAppErrorBoundary } from 'src/components/MyAppErrorBoundary.tsx' // Update this path to where your MyAppErrorBoundary is located
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
