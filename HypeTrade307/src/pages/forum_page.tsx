@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -6,7 +5,7 @@ import Navbar from "../components/NavbarSection/Navbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppTheme from "../components/shared-theme/AppTheme";
 import "./Forum.css";
-import { API_BASE_URL, API_LOCAL_URL } from '../config';
+import { API_BASE_URL } from '../config';
 import {
   Dialog,
   DialogTitle,
@@ -76,6 +75,13 @@ function Forum() {
                 });
 
                 setThreads(response.data);
+                if (threads.length == 0) {
+                    console.log("no threads?")
+                }
+                else {
+                    console.log("thread count:");
+                    console.log(threads.length);
+                }
             } catch (err: any) {
                 console.error("Error fetching threads:", err);
                 setError(err.response?.data?.detail || "Failed to load threads");
