@@ -70,18 +70,18 @@ docker buildx build \
 --platform=linux/amd64 \
 --cache-from=type=local,src=.build-cache \
 --cache-to=type=local,dest=.build-cache \
--t us-central1-docker.pkg.dev/basic-formula-451520-c0/hypetrade-repo/hypetrade-app:ADD v<x> \
+-t us-central1-docker.pkg.dev/hypetrade1/hypetrade-repo/hypetrade-app:ADD v<x> \
 --push .
 
 IGNORE (DEPRECATED) (SCROLL FURTHER DOWN):
 gcloud:
 gcloud run deploy hypet \
---image=us-central1-docker.pkg.dev/basic-formula-451520-c0/hypetrade-repo/hypetrade-app:latest \
+--image=us-central1-docker.pkg.dev/hypetrade1/hypetrade-repo/hypetrade-app:latest \
 --platform=managed \
 --region=us-central1 \
 --allow-unauthenticated \
 --env-vars-file .env.yaml \
---add-cloudsql-instances=basic-formula-451520-c0:us-central1:hypetrade-db
+--add-cloudsql-instances=hypetrade1:us-central1:hypetrade-db
 
 ----------------------------------------------------------------------------------------------
 
@@ -110,7 +110,7 @@ Set up gcli credentials (run one by one):
 
 gcloud auth login
 
-gcloud config set project basic-formula-451520-c0
+gcloud config set project hypetrade1
 
 
 To verify creds:
@@ -148,7 +148,7 @@ lmk if anything else
 **_[IMPORTANT: add your name in line 139 in place of mine. it'll set up a service isolated to you, and you can test, debug and deploy on your own]_**
 
 this is your command:
-export IMAGE_NAME=us-central1-docker.pkg.dev/basic-formula-451520-c0/hypetrade-repo/hypetrade-app && \
+export IMAGE_NAME=us-central1-docker.pkg.dev/hypetrade1/hypetrade-repo/hypetrade-app && \
 export SHORT_SHA=$(git rev-parse --short HEAD) && \
 DOCKER_BUILDKIT=1 docker build \
 --platform=linux/amd64 \
