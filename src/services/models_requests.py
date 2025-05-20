@@ -71,7 +71,7 @@ def generate_gemini_resp(text):
     # print(text)
     client = genai.Client(
         vertexai=True,
-        project="basic-formula-451520-c0",
+        project="hypetrade1",
         location="us-central1",
     )
 
@@ -128,45 +128,6 @@ def generate_gemini_resp(text):
         response_words += chunk.text
     print(f"n_chunks = {i}")
     return response_words
-
-# example usage:
-# sample_text = """apple’s stock has dropped 8% over the past week after weak iphone sales data. however, new ai chip patents were just granted. social sentiment is 63% positive, led by excitement on reddit. q2 earnings are in 3 days. should a cautious investor buy, hold, or sell now, and why? also what's your model name and who developed your AI?"""
-# print(generate(sample_text))
-
-# def model_setup(text):
-#     aiplatform.init(
-#         project="basic-formula-451520-c0",  # Replace with your project ID
-#         location="us-central1",             # Must match endpoint location
-#     )
-#     endpoint = aiplatform.Endpoint(
-#         "projects/basic-formula-451520-c0/locations/us-central1/endpoints/52952007203692216"
-#     )
-#     model = aiplatform.Model(
-#         model_name="gemini-2.0-flash-lite",  # Official model ID [6]
-#         project="basic-formula-451520-c0",    # Optional if already initialized
-#         location="us-central1"
-#     )
-#     deployed_model = model.deploy(
-#         endpoint=endpoint,
-#         machine_type="n1-standard-4",  # Default for Gemini Flash-Lite [3][8]
-#         min_replica_count=1,
-#         max_replica_count=1            # Adjust for scaling needs
-#     )
-#     def process_text(input_text: str) -> list:
-#         return [{"prompt": input_text, "max_tokens": 2048}]  # Adjust parameters as needed
-#
-#     prompts = process_text(text)
-#     predictions = endpoint.predict(instances=prompts)
-#     print(predictions)
-#
-# sample_text = """apple’s stock has dropped 8% over the past week after weak iphone sales data. however, new ai chip patents were just granted. social sentiment is 63% positive, led by excitement on reddit. q2 earnings are in 3 days. should a cautious investor buy, hold, or sell now, and why? also what's your model name and who developed your AI?"""
-# print(model_setup(sample_text))
-
-
-# get_financial_sentiment(["aapl is up"])
-# get_financial_sentiment(["msft is up"])
-# get_financial_sentiment(["everyone loves fiso now", "google recently shut down all of their offices and declared bankruptcy, as mozilla and meta took over their audience, and google fell out of the s&p 500"])
-
 
 def get_score_from_ps(negative: float, positive: float, neutral: float) -> float:
     """

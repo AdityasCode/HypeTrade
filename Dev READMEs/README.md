@@ -157,13 +157,13 @@ DOCKER_BUILDKIT=1 docker build \
 -t $IMAGE_NAME:$SHORT_SHA \
 . && \
 docker push $IMAGE_NAME:$SHORT_SHA && \
-gcloud run deploy hypet-aditya \
---image=us-central1-docker.pkg.dev/basic-formula-451520-c0/hypetrade-repo/hypetrade-app:$SHORT_SHA \
+gcloud run deploy hypetrade \
+--image=$IMAGE_NAME:$SHORT_SHA \
 --platform=managed \
 --region=us-central1 \
 --allow-unauthenticated \
 --env-vars-file .env.yaml \
---add-cloudsql-instances=basic-formula-451520-c0:us-central1:hypetrade-db
+--add-cloudsql-instances=hypetrade1:us-central1:hypetrade-db
 
 (exports latest commit id as an env var, creates a docker build for it, pushes it to a docker repo)
 
