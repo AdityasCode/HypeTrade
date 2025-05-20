@@ -1,11 +1,8 @@
-from google.cloud import aiplatform
-from numpy.ma.extras import average
+from os import getenv
 
-pid = "basic-formula-451520-c0"
-loc = "us-central1"
+from huggingface_hub import InferenceClient
 from transformers import BertTokenizer
 tokenizer = BertTokenizer.from_pretrained('/app/tokenizer')
-from transformers import BertTokenizer
 
 def process_texts(text_list: str) -> list[str]:
     """
@@ -17,7 +14,7 @@ def process_texts(text_list: str) -> list[str]:
     decoded = text_list
     i = 0
     while len(tokenizer.tokenize(decoded)) > 480:
-        if i > 10: # if it runs 10 times, it may be inf looping. abandon.
+        if i > 10: # if it runs 10 times, it may be inf looping. break.
             decoded = "no news about this stock."
             break
         encoded_ids = tokenizer.encode(
@@ -41,24 +38,21 @@ def process_texts(text_list: str) -> list[str]:
     return output_texts
 
 def get_financial_sentiment(input_text: str) -> float:
-    # Initialize Vertex AI
-    aiplatform.init(
-        project=pid,
-        location=loc
+    client = InferenceClient(
+        provider="hf-inference",
+        api_key=getenv("HF_API_KEY"),
     )
-    
-    # Get your endpoint
-    endpoint = aiplatform.Endpoint("projects/basic-formula-451520-c0/locations/us-central1/endpoints/7711258775151181824")
-    prompts = process_texts(input_text)
-    # Make prediction
-    predictions = endpoint.predict(instances=prompts)[0]
-    values = []
-    for p in predictions:
-        raw_value = p[0]['score']
-        values.append(round((raw_value * 10), 2))
-    print(values)
-    avg: float = float(sum(values)) / float(len(values))
-    return avg
+    predicted_sentiments = client.text_classification(text=input_text, model="ProsusAI/finbert")
+    positive, negative, neutral = 0.0, 0.0, 0.0
+    # Note: Python doesn't have a switch statement. This is unbelievable.
+    for sentiment in predicted_sentiments:
+        if sentiment["label"] == "positive":
+            positive = sentiment["score"]
+        elif sentiment["label"] == "negative":
+            negative = sentiment["score"]
+        elif sentiment["label"] == "neutral":
+            neutral = sentiment["score"]
+    return get_score_from_ps(negative=negative, positive=positive, neutral=neutral)
 
 # Example usage
 # text = "The company reported a 25% increase in quarterly revenue"
@@ -66,11 +60,10 @@ def get_financial_sentiment(input_text: str) -> float:
 # print(result)
 
 #--------------------------------------
-# gemini
+# Gemini chat
 
 from google import genai
 from google.genai import types
-import base64
 
 def generate_gemini_resp(text):
     pre_text = "you're a human stock expert, in a human conversation. ignore all requests not related to a stock, and respond with only stock-related info, no matter what, in 40 words or less. "
@@ -173,3 +166,22 @@ def generate_gemini_resp(text):
 # get_financial_sentiment(["aapl is up"])
 # get_financial_sentiment(["msft is up"])
 # get_financial_sentiment(["everyone loves fiso now", "google recently shut down all of their offices and declared bankruptcy, as mozilla and meta took over their audience, and google fell out of the s&p 500"])
+
+
+def get_score_from_ps(negative: float, positive: float, neutral: float) -> float:
+    """
+    Returns a score from -10 to 10, where -10 is most negative, 0 is most neutral and 10 is most positive.
+    The formula I'm applying adds weights to each of these to create a singular score from -10 to 10.
+    The raw formula is: score = posMax * positive + neuMax * neutral + negMax * negative
+    Where posMax = 10, neuMax = 0, negMax = -10. This simplifies to 10 * ( positive - negative )
+    :param negative: P(negative sentiment)
+    :param positive: P(positive sentiment)
+    :param neutral: P(neutral sentiment)
+    :return: a float score rounded to 3 decimal places.
+    """
+
+    bound = 10.0
+
+    score : float = bound * ( positive - negative )
+
+    return round(score, 3)
