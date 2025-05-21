@@ -10,34 +10,26 @@ from src.db.database import get_db
 
 router = APIRouter(prefix="/scraping", tags=["Scraping"])
 
-SUBREDDITS = ["stocks", "investing", "wallstreetbets", "stockmarket", "investor"]
- # returns a list of models.Stock, which have attributes stock_id
+SUBREDDITS = ["stocks", "investing", "wallstreetbets", "stockmarket"]
 
-def periodical_update(db: Session):
+@router.get("/", tags=["scraping"])
+def update_sentiments(db: Session = Depends(get_db)):
     """
-    Periodically updates the database with new Reddit posts.
+    Updates the database with new Reddit posts.
     """
-    STOCKS = crud.get_top_stocks(db)
-    for STOCK in STOCKS:
-        stock_id = STOCK.stock_id
-        keyword = STOCK.ticker
+    stocks = crud.get_top_stocks(db)
+    for stock in stocks:
+        stock_id = stock.stock_id
+        keyword = stock.ticker
         for SUBREDDIT in SUBREDDITS:
             scraping.scrape_subreddit_posts(db, SUBREDDIT, keyword, stock_id, limit=50)
         scraping.process_unprocessed_entries(db, stock_id)
-
-@router.get("/", tags=["scraping"])
-def trigger_periodical_update(db: Session = Depends(get_db)):
-    """
-    Triggers the periodical_update function via an HTTP GET request.
-    """
-    periodical_update(db)
-    return {"message": "Scraping and sentiment update completed for top stocks."}
-
 
 def requested_update(db: Session, keyword: str, stock_id: int):
     for SUBREDDIT in SUBREDDITS:
         # Scrape the subreddit for posts containing the keyword
         scraping.scrape_subreddit_posts(db, SUBREDDIT, keyword, stock_id, limit=50)
     scraping.process_unprocessed_entries(db, stock_id)
+    return {"message": "Scraping and sentiment update completed for top stocks."}
 
 # periodical_update(db=db)

@@ -141,11 +141,11 @@ def process_unprocessed_entries(db: Session, stock_id: int):
         db.query(scraped_reddit_entries)
         .join(models.scrapedentry_stocks, models.scrapedentry_stocks.c.entry_id == scraped_reddit_entries.entry_id)
         .filter(models.scrapedentry_stocks.c.stock_id == stock_id)
-        # .filter(scraped_reddit_entries.processed_at.is_(None))
+        .filter(scraped_reddit_entries.processed_at.is_(None))
         .all()
     )
     # print("length is {}".format(len(unprocessed_entries)))
-    texts:list[str] = [(entry.title + " " + (entry.content or "")) for entry in unprocessed_entries]
+    # texts:list[str] = [(entry.title + " " + (entry.content or "")) for entry in unprocessed_entries]
     # values = get_financial_sentiment(texts) #call fn w texts as variable
     for i in range(len(unprocessed_entries) - 1):
         entry = unprocessed_entries[i]
