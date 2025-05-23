@@ -4,4 +4,6 @@ Just create an account on our website, create a portfolio and add stocks! We'll 
 
 You'll find a Help section on the website, for tutorials and an FAQ.
 
+The ViewStock page (and its Chat feature) and the Forum page (view-only) are open to non-authorized users. For everything else, you can create an account and log in!
+
 For any issues or queries, please feel free to reach out to us at: hypetrademail@gmail.com!
