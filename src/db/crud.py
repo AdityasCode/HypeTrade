@@ -1,16 +1,16 @@
 import datetime
-from enum import Enum
-from fastapi import HTTPException, status
-from pyparsing import Literal
-from sqlalchemy import func
-from sqlalchemy.orm import Session
-from random import random
 from datetime import datetime, timedelta
+from enum import Enum
+from random import random
 
+from fastapi import HTTPException, status
+from passlib.hash import bcrypt as hashing
+from sqlalchemy.orm import Session
 
 from src.processing.scraping import parse_timeframe
 from . import models, schemas
-from passlib.hash import bcrypt as hashing
+
+
 # ----------------------------
 #  USER CRUD
 # ----------------------------
@@ -613,7 +613,7 @@ def mark_all_notifications_as_read(db: Session, user_id: int):
 # top stocks function
 
 def get_stock_id_by_ticker(db: Session, ticker: str) -> int | None:
-    stock = db.query(stock).filter(stock.ticker == ticker.upper()).first()
+    stock = db.query(models.Stock).filter(models.Stock.ticker == ticker.upper()).first()
     return stock.stock_id if stock else None
 
 def get_top_stocks(db: Session, limit: int = 20) -> list[models.Stock]:

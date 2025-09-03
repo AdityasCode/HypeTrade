@@ -1,8 +1,10 @@
 from typing import List
+
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+
 from src.db import crud, models, schemas
 from src.db.database import get_db
-from fastapi import APIRouter, Depends, HTTPException, status
 from src.security import get_current_user
 
 router = APIRouter(prefix="/flag", tags=["Flags"])

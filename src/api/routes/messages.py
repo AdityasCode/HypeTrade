@@ -1,9 +1,11 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import List
-from src.security import get_current_user
+
 from src.db import crud, models, schemas
 from src.db.database import get_db
+from src.security import get_current_user
 
 router = APIRouter(prefix="/messages", tags=["Messages"])
 

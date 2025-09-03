@@ -1,16 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import List, Optional
-from datetime import datetime
-from pydantic import BaseModel
 
-from src.db import models
-from src.security import get_current_user
-from src.db.database import get_db
-from src.db import schemas
 from src.db import crud
-from fastapi.logger import logger
-
+from src.db import schemas
+from src.db.database import get_db
 
 router = APIRouter(
     prefix="/specific-stock",

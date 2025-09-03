@@ -1,5 +1,6 @@
 from collections import deque
 from typing import List
+
 from src.api.routes.users import read_users
 from src.db.database import get_db
 

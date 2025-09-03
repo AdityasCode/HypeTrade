@@ -2,17 +2,14 @@
 import random
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from src.services.email_send import send_simple_message
-from src.services.validation import Errors, validate_create
-from src.db.database import get_db
 from src.db import schemas
 from src.db.crud import get_user_by_email, create_user  # adapt to your code
+from src.db.database import get_db
 from src.security import verify_password, hash_password, create_access_token
-from src.db.models import User
-from pydantic import BaseModel
-
+from src.services.email_send import send_simple_message
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 

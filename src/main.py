@@ -1,22 +1,19 @@
-from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, Response
 import os
 import sys
+
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, Response
+from fastapi.staticfiles import StaticFiles
+
 #print("frontend folder contents:", os.listdir("/app/frontend"))
 # Add current directory to sys path
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
-import uvicorn
-from fastapi import HTTPException
-import json
 
 # Local imports
 # import backend functions
-from src import check_if_friends as cf, search_users as su
 
 # import database setup
-from src.db import crud
 from src.db.database import SessionLocal, engine, Base
 from src.api.routes.notifications import router as notification_router
 from src.api.routes.users import router as users_router
@@ -27,7 +24,6 @@ from src.api.routes.auth import router as auth_router
 from src.api.routes.sentiment import router as sentiment_router
 from src.api.routes.threads import router as threads_router
 from src.api.routes.posts import router as posts_router, comment_router
-from src.api.routes.friends import router as friends_router
 from src.processing.stock_processing import seed_stocks
 from src.processing import scraping as sc
 from src.api.routes.flagging import router as flagging_router

@@ -1,7 +1,8 @@
-from sqlalchemy import create_engine, text
-from fastapi import FastAPI, HTTPException
 import os
+
 from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException
+from sqlalchemy import create_engine, text
 
 load_dotenv()
 

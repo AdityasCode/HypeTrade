@@ -1,8 +1,11 @@
+import re
 from enum import Enum
+
+from sqlalchemy.orm import Session
+
 import src.db.crud as crud
 import src.db.schemas as schemas
-from sqlalchemy.orm import Session
-import re
+
 
 class Errors(Enum):
     OK = 0

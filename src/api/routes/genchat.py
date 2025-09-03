@@ -1,12 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
-from typing import List
 import logging
+
+from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 
-from src.db import models, schemas
-from src.db.database import get_db
-from src.security import get_current_user
 from src.services.models_requests import generate_gemini_resp
 
 logger = logging.getLogger(__name__)

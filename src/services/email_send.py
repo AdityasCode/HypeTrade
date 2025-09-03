@@ -1,10 +1,12 @@
 from __future__ import print_function
+
 from dotenv import load_dotenv
+
 load_dotenv()
 import os
 import brevo_python
 from brevo_python.rest import ApiException
-from pprint import pprint
+
 
 def send_simple_message(email, content):
     """

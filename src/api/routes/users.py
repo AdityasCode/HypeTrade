@@ -1,10 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from src.security import get_current_user, verify_password
 from src.db import crud, models, schemas
 from src.db.database import get_db
-from src.services.validation import Errors, validate_password, validate_update, validate_create
+from src.security import get_current_user, verify_password
+from src.services.validation import Errors, validate_password, validate_update
 
 router = APIRouter(prefix="/users", tags=["Users"])
 

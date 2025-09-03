@@ -1,13 +1,14 @@
-from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile
-from sqlalchemy.orm import Session
 from typing import List
 
-from src.db import models
-from src.security import get_current_user  # This dependency decodes the JWT and returns the current user.
-from src.db.database import get_db
-from src.db import schemas
+from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile
+from sqlalchemy.orm import Session
+
 from src.db import crud
+from src.db import models
+from src.db import schemas
+from src.db.database import get_db
 from src.processing import import_portfolio
+from src.security import get_current_user  # This dependency decodes the JWT and returns the current user.
 
 router = APIRouter(prefix="/portfolios", tags=["Portfolios"])
 

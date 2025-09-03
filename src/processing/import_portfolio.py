@@ -1,8 +1,10 @@
 
-from sqlalchemy.orm import Session
-from src.db import models
-from src.db import crud
 import pandas as pd
+from sqlalchemy.orm import Session
+
+from src.db import crud
+from src.db import models
+
 
 def import_portfolio_from_csv(db: Session, file, portfolio):
 

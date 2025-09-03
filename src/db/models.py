@@ -1,7 +1,9 @@
-from sqlalchemy import Column, Float, Integer, String, Table, Text, ForeignKey, Enum, Boolean, TIMESTAMP, VARCHAR, func
-from sqlalchemy.orm import relationship, backref
-from .database import Base
 import datetime
+
+from sqlalchemy import Column, Float, Integer, String, Table, Text, ForeignKey, Enum, Boolean, TIMESTAMP, func
+from sqlalchemy.orm import relationship
+
+from .database import Base
 
 # ------------------------------------------------------------------
 # ASSOCIATION TABLES (For Many-to-Many Relationships)

@@ -1,7 +1,8 @@
-from sqlalchemy.orm import Session
-from src.db import models
 import pandas as pd
 import requests
+from sqlalchemy.orm import Session
+
+from src.db import models
 
 WIKI_SP500_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
 

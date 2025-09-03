@@ -1,21 +1,20 @@
 # reddit_scraper.py
 import datetime
 import os
-import re
 from time import sleep
 
-import dotenv
 # If you want to use PRAW:
 import praw
 from flask.cli import load_dotenv
-from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
 
 from services.models_requests import get_financial_sentiment
 # Import your DB models and session
-from src.db.database import SessionLocal
 from src.db import models
 from src.db.models import scraped_reddit_entries
+
+
 # Example: from huggingface or your pipeline
 # from src.sentiment.finbert import run_finbert_sentiment
 

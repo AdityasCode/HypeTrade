@@ -2,9 +2,6 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 import src.processing.scraping as scraping
-import src.db.models
-import datetime
-import src.db.schemas
 from src.db import crud
 from src.db.database import get_db
 

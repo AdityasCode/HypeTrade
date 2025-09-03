@@ -1,6 +1,9 @@
-import yfinance as yf
 import json
+
 import pandas as pd
+import yfinance as yf
+
+
 # pip lxml pandas yfinance
 def get_top_20_valued_stocks():
     # Fetch S&P 500 tickers dynamically

@@ -1,11 +1,11 @@
+import random
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
-from typing import List
-import random
-from src.db.database import get_db
+
 from src.db import models
-from src.db.schemas import StockCreate, StockUpdate, StockResponse
 from src.db.crud import (
     create_stock,
     get_stock,
@@ -13,6 +13,8 @@ from src.db.crud import (
     update_stock,
     delete_stock
 )
+from src.db.database import get_db
+from src.db.schemas import StockCreate, StockUpdate, StockResponse
 
 router = APIRouter(prefix="/stocks", tags=["Stocks"])
 

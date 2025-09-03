@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+
 from src.db import crud, schemas
+from src.db import models
 from src.db.database import get_db
 from src.processing import scraping, sentiment_analysis
-from src.db import models
+
 router = APIRouter(prefix="/specific-stock", tags=["Sentiment"])
 
 @router.post("/request")

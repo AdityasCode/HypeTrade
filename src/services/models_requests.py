@@ -1,41 +1,7 @@
 from os import getenv
 
 from huggingface_hub import InferenceClient
-from transformers import BertTokenizer
-tokenizer = BertTokenizer.from_pretrained('/app/tokenizer')
 
-def process_texts(text_list: str) -> list[str]:
-    """
-    for each string in text_list, truncate it to max 512 tokens
-    (including special tokens) and decode back to plain text.
-    """
-    output_texts = []
-    # tokenize & truncate
-    decoded = text_list
-    i = 0
-    while len(tokenizer.tokenize(decoded)) > 480:
-        if i > 10: # if it runs 10 times, it may be inf looping. break.
-            decoded = "no news about this stock."
-            break
-        encoded_ids = tokenizer.encode(
-            decoded,
-            add_special_tokens=True,
-            max_length=480,
-            truncation=True
-        )
-        # decode back to string without special tokens
-        decoded = tokenizer.decode(
-            encoded_ids,
-            skip_special_tokens=True,
-            clean_up_tokenization_spaces=True
-        )
-    if decoded != "":
-        if len(decoded) > 200: # approximation bc a tokens like 1.3 of a word
-            decoded = decoded[:200]
-    else:
-        decoded = "no news about this stock."
-    output_texts.append(decoded)
-    return output_texts
 
 def get_financial_sentiment(input_text: str) -> float:
     client = InferenceClient(
