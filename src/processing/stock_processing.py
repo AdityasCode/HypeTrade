@@ -1,9 +1,7 @@
 from sqlalchemy.orm import Session
-
-from db.crud import get_sentiment_by_stock_id
-from src.db.crud import get_top_stocks
 from src.db import models
 import pandas as pd
+import requests
 
 WIKI_SP500_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
 
@@ -15,19 +13,24 @@ TOP_20_TICKERS = {
 
 def fetch_sp500_from_wikipedia() -> pd.DataFrame:
     """
-    Scrapes the S&P 500 listing from Wikipedia using pandas read_html.
-    Returns a DataFrame with at least 'Symbol' and 'Security'.
+    Scrapes the S&P 500 listing from Wikipedia.
+    Returns a DataFrame with 'Symbol' and 'Security'.
     """
-    tables = pd.read_html(WIKI_SP500_URL)
-    # The first table on the page typically contains the listing
-    # but verify if you see multiple tables
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/124.0.0.0 Safari/537.36"
+        )
+    }
+    resp = requests.get(WIKI_SP500_URL, headers=headers)
+    resp.raise_for_status()
+
+    tables = pd.read_html(resp.text)
     sp500_table = tables[0]
 
-    # Usually, the columns are "Symbol", "Security", etc.
-    # But always confirm the actual column names in the DataFrame
     df = sp500_table[["Symbol", "Security"]].copy()
-    # Clean up any weird formatting
-    df["Symbol"] = df["Symbol"].str.replace(".", "-", regex=False)  # e.g. "BRK.B" => "BRK-B" if needed
+    df["Symbol"] = df["Symbol"].str.replace(".", "-", regex=False)  # e.g. BRK.B → BRK-B
     return df
 
 def get_stock_lists_from_sp500() -> tuple[list[dict], list[dict]]:
