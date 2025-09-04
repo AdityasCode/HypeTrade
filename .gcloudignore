@@ -1,0 +1,8 @@
+HypeTrade307/*
+!HypeTrade307/dist/**
+.venv
+__pycache__/
+*.pyc
+node_modules
+.git
+.DS_Store
