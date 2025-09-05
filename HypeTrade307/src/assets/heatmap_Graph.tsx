@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Treemap, ResponsiveContainer } from "recharts";
-import {API_BASE_URL} from "@/config.ts";
+import {API_BASE_URL} from "../config.ts";
 
 // Define the interface for the data item
 interface DataItem {

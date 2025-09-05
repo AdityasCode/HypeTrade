@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://hypet-145797464141.us-central1.run.app',
+        target: 'https://hypetrade-gcp-server-800055345422.us-central1.run.app',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '/api'),
       }
@@ -19,6 +19,11 @@ export default defineConfig({
   base: '/',
   build: {
     outDir: 'dist',
-    sourcemap: true
+    sourcemap: true,
+    rollupOptions: {
+      external: [
+          './src/config.ts'
+      ]
+    }
   }
 })

@@ -73,12 +73,12 @@ login_and_call_api()
 # 4 doing get to a specific url (can also be post instead)
 # login_and_call_api(
 #     method="get",
-#     target_url="https://hypet-145797464141.us-central1.run.app/api/portfolios/"
+#     target_url="https://hypetrade-gcp-server-800055345422.us-central1.run.app/api/portfolios/"
 # )
 
 # 4 doing a login/post to a specific url [untested!]:
 # login_and_call_api(
 #     method="post",
-#     target_url="https://hypet-145797464141.us-central1.run.app/api/some-post-endpoint",
+#     target_url="https://hypetrade-gcp-server-800055345422.us-central1.run.app/api/some-post-endpoint",
 #     payload={"key": "value"}
 # )

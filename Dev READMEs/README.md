@@ -177,7 +177,7 @@ https://console.cloud.google.com/logs/query;query=resource.type%3D%22cloud_run_r
 
 And finally, the actual url (for now) is:
 
-https://hypet-145797464141.us-central1.run.app
+https://hypetrade-gcp-server-800055345422.us-central1.run.app
 
 Cloud SQL, you can view, edit and run commands for the db here:
 

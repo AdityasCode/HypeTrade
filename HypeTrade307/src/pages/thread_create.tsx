@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import "./thread_create.css";
-import {API_BASE_URL} from "@/config.ts";
+import {API_BASE_URL} from "src/config.ts";
 
 const ThreadCreate = () => {
     const [title, setTitle] = useState("");

@@ -47,8 +47,8 @@ seed_stocks(db=SessionLocal())
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://hypet-145797464141.us-central1.run.app/",  # Cloud Run wildcard
-    "https://hypet-145797464141.us-central1.run.app",  # Cloud Run wildcard
+    "https://hypetrade-gcp-server-800055345422.us-central1.run.app/",  # Cloud Run wildcard
+    "https://hypetrade-gcp-server-800055345422.us-central1.run.app",  # Cloud Run wildcard
     "https://hypetrade-145797464141.us-central1.run.app/"
 ]
 

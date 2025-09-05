@@ -3,7 +3,7 @@ import {
     AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import { TooltipProps } from "recharts";
-import {API_BASE_URL} from "@/config.ts";
+import {API_BASE_URL} from "../config";
 
 interface DataPoint {
     timestamp: string;
