@@ -3,6 +3,7 @@ import {
     AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import { TooltipProps } from "recharts";
+import {API_BASE_URL} from "@/config.ts";
 
 interface DataPoint {
     timestamp: string;
@@ -39,12 +40,12 @@ const AreaGraph: React.FC<AreaGraphProps> = ({ ticker }) => {
     const fetchStockIdAndData = async (n: number) => {
         try {
             // Step 1: Get stock ID from ticker
-            const idRes = await fetch(`/api/stocks/${ticker}/id`);
+            const idRes = await fetch(`${API_BASE_URL}/stocks/${ticker}/id`);
             if (!idRes.ok) throw new Error("Failed to fetch stock ID");
             const { stock_id } = await idRes.json();
 
             // Step 2: Fetch sentiment data
-            const dataRes = await fetch(`/api/specific-stock/${stock_id}?n=${n}`);
+            const dataRes = await fetch(`${API_BASE_URL}/specific-stock/${stock_id}?n=${n}`);
             if (!dataRes.ok) throw new Error("Failed to fetch sentiment data");
             const data = await dataRes.json();
 

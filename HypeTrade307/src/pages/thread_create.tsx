@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import "./thread_create.css";
+import {API_BASE_URL} from "@/config.ts";
 
 const ThreadCreate = () => {
     const [title, setTitle] = useState("");
@@ -11,7 +12,7 @@ const ThreadCreate = () => {
     const router = useRouter();
 
     useEffect(() => {
-        axios.get("/api/stocks") // assuming there's an endpoint for fetching stocks
+        axios.get(`${API_BASE_URL}/stocks`) // assuming there's an endpoint for fetching stocks
             .then(response => setStocks(response.data))
             .catch(error => console.error("Error fetching stocks:", error));
     }, []);
@@ -19,7 +20,7 @@ const ThreadCreate = () => {
     const createThread = async () => {
         if (!title || !selectedStock) return;
         try {
-            const response = await axios.post("/api/threads/", {
+            const response = await axios.post(`${API_BASE_URL}/threads/`, {
                 title,
                 stock_id: selectedStock
             });

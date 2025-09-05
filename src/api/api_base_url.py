@@ -1,0 +1,1 @@
+API_BASE_URL = "https://hypetrade-gcp-server-800055345422.us-central1.run.app/api"

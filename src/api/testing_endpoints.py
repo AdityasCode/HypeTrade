@@ -1,9 +1,12 @@
 import requests
 
+from src.api.api_base_url import API_BASE_URL
+
+
 def login_and_call_api(
         email="adityagandhi98101@gmail.com",
         password="hohbox-cynze6-defmYx",
-        target_url="https://hypet-145797464141.us-central1.run.app/api/auth/login",
+        target_url=f"{API_BASE_URL}/auth/login",
         method="login",
         payload=None
 ):
@@ -23,7 +26,7 @@ def login_and_call_api(
 
     try:
         login_resp = requests.post(
-            "https://hypet-145797464141.us-central1.run.app/api/auth/login",
+            f"{API_BASE_URL}/auth/login",
             json=login_data
         )
         login_resp.raise_for_status()

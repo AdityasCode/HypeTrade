@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Treemap, ResponsiveContainer } from "recharts";
+import {API_BASE_URL} from "@/config.ts";
 
 // Define the interface for the data item
 interface DataItem {
@@ -48,7 +49,7 @@ const HeatMap = () => {
     const [data, setData] = useState<DataItem[]>([]);
 
     useEffect(() => {
-        fetch("api/specific-stock/heatmap/summary")
+        fetch(`${API_BASE_URL}/specific-stock/heatmap/summary`)
             .then((res) => res.json())
             .then((jsonData) => {
                 const processed = jsonData

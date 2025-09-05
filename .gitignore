@@ -67,3 +67,4 @@ dist-ssr
 *.sw?
 HypeTrade307/src/pages/LoginForm.css
 .vercel
+src/db/nothing

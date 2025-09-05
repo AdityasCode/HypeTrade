@@ -124,6 +124,3 @@ def search_user(name: str, db: Session = Depends(get_db)):
     Search users by name (partial match).
     """
     return crud.get_user_by_name(db, name=name)
-
-
-
